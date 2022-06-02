@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>{{fname}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .imgbox {
+            display: grid;
+            height: 100%;
+        }
+        .center-fit {
+            max-width: 100%;
+            max-height: 100vh;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="imgbox">
+    <video controls autoplay muted class="center-fit" > 
+        <source src='{{url}}' type="video/mp4">
+    </video>
+</div>
+</body>
+</html>
