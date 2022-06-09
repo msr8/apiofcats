@@ -29,12 +29,13 @@ html{
     color: red;
     text-align: center;
     border-radius: 15px;
-    background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcmkt-image-prd.global.ssl.fastly.net%2F0.1.0%2Fps%2F1828200%2F600%2F600%2Fm1%2Ffpnw%2Fwm1%2Fcurved-white-lines-on-black-background-abstract-seamless-pattern-.jpg%3F1477920269%26s%3D1e85c401b2698dd39f9e9f771a6d233c&f=1&nofb=1);
 }
 </style>
 
-<h1 class=mainheading>Lol</h1>
+<h1 class=mainheading>Introduction</h1>
 
 <br>
 
-Hello there
+Hello there! This is a site for, well, cat images and videos. There is currently {{shit_to_be_filled_out_in_python}}
+
+## TEST TEST TES
