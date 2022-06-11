@@ -1,0 +1,170 @@
+<style>
+body,html{
+  margin:0;
+  width:100%;
+}
+html{
+    /* background-color: #191c1b; */
+    background-color: #090e12;
+}
+
+/* .container {
+    padding: 1em;
+    max-width:750px;
+    min-height:100vh;
+    width:90%;
+    margin: auto;
+    box-sizing:border-box;
+    background-color:aquamarine;
+}
+
+.row {
+    margin:0;
+    padding-left:20px;
+} */
+
+.mainheading {
+    font-family: Ubuntu Mono;
+    /* font-family: Consolas; */
+    border: 5px solid #169299;
+    padding: 10px;
+    color: red;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.maintext {
+    color: white;
+    font-family: Consolas;
+}
+
+.endpoints{
+    color: white;
+    font-family: Consolas;
+    text-decoration: underline;
+}
+
+.basic{
+    color: white;
+    font-family: Consolas;
+}
+
+code{
+    color: white;
+    background-color: #1e2327;
+    /* background-color: #1b1b21; */
+    font-family: Consolas;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+table, th, td{
+    color: white;
+    font-family: Consolas;
+    border: 1px solid wheat;
+    border-collapse: collapse;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+</style>
+
+<!-- https://stackoverflow.com/questions/10379015/how-to-use-code-blocks-in-html -->
+<style>
+    /* code {
+      font-family: Consolas,"courier new";
+      color: crimson;
+      background-color: #f1f1f1;
+      padding: 2px;
+      font-size: 105%;
+    } */
+</style>
+
+
+
+
+
+
+<h1 class=mainheading>Introduction</h1>
+
+
+<p class=maintext>
+Hello there! This is a site for, well, cat images and videos.
+There are currently {{shit_to_be_filled_out_in_python}} images and videos present in the library.
+This website is open source (<a href="https://github.com/msr8/catapi" target="_blank">https://github.com/msr8/catapi</a>)
+so feel absolutely free to check out the code yourself, report an issue, or contribute towards it :).
+I got all my images/videos through public sources (mostly reddit) and I DO NOT claim ownership of any of them.
+If you want to check out the random cats I have stored, you can do so by clicking on the "Random Cat" button
+which will take you to (<a href="{{DOMAIN}}/random" target="_blank">{{DOMAIN}}/random</a>).
+Sometimes what I like to do is just visit /random and just keep refreshing and enjoying all the cats
+</p>
+
+<br>
+
+<h1 class=mainheading>Endpoints</h1>
+
+<a href="{{DOMAIN}}/random" target="_blank"><h2 class="endpoints">/random</h2></a>
+<details class="basic">
+<summary>Info</summary>
+    <p class=maintext>
+        <b>Methods:</b> GET
+        <br><br>
+        <b>Parameters</b>:
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>URL</td>
+                <td>ext</td>
+                <td>string</td>
+                <td>jpg,jpeg,png,mp4</td>
+                <td>The extension of the image to be returned. You can allow multiple extensions by seperating them with a comma</td>
+                <td>/random?ext=png,jpg,jpeg</td>
+            </tr>
+            <tr>
+                <td>URL</td>
+                <td>max_size</td>
+                <td>int</td>
+                <td>None (no limit)</td>
+                <td>The maximum size of image to be returned (in bytes)</td>
+                <td>/random?max_size=8000000</td>
+            </tr>
+            <tr>
+                <td>URL</td>
+                <td>redirect</td>
+                <td>bool</td>
+                <td>False</td>
+                <td>Wether to redirect the user to the /library endpoint</td>
+                <td>/random?redirect=True</td>
+            </tr>
+        </table>
+        <br><br>
+        <b>Sample request:</b>
+        <br><br>
+        <code>
+            curl {{DOMAIN}}/random
+        </code>
+        <br><br><br>
+        <b>Sample output:</b>
+        <br>
+        <img src="{{DOMAIN}}/library/acasy9YlEgPkHDpAf1l_YuSkqG8zskBTbI-5a1jJMT8.png" alt="Random cat" width="500" height="500">
+    </p>
+</details>
+
+<br>
+
+
+
+
+
+<!-- 32,35,43  24,26,27  186,179,169
+30, 35, 39 (Bg color of block) (#background-color: 1e2327;)
+9,14,18 (page bg)
+-->
