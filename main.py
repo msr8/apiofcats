@@ -70,22 +70,25 @@ api.add_resource(Stats, '/api/stats')
 
 
 
-@app.route('/favicon.ico')
+@app.route('/favicon.ico', methods=["GET", "POST"])
 def favicon():
     return send_from_directory(STATIC, 'favicon.ico')
 
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def page_home():
     return 'Hello :)'
 
 
 
-@app.route('/random')
+@app.route('/random', methods=["GET", "POST"])
 def page_random():
     # Gets all the args
     ext, max_size, redirect_arg, _ = process_arguments(request, DEFAULT_EXTS)
+    print(request.args.get('ext'))
+    print(request_api.form.get('ext'))
+    print(ext)
     # Gets the file
     try:       file_dic = get_file_path(EYEBLEACH_PATH, max_size=max_size, allowed_exts=ext)[0]
     # If there is an error processing the arguments, shows error
@@ -103,7 +106,7 @@ def page_random():
     return render_template(html_file, fname=fname, url=fp)
 
 
-@app.route('/library/<fname>')
+@app.route('/library/<fname>', methods=["GET", "POST"])
 def page_library(fname):
     return send_from_directory(EYEBLEACH_PATH, fname)
 
@@ -140,7 +143,7 @@ if __name__ == '__main__':
 -> Logging
 -> Improve /stats
 -> Add library exploring
--> Check if the max_size given is an int
+-> Check if the max_size given is an int, and None
 
 http://127.0.0.1:5000/library/ead9beic1jh71.jpeg
 '''

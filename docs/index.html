@@ -1,11 +1,13 @@
 <style>
-body,html{
+/* body,html{
   margin:0;
   width:100%;
-}
+} */
 html{
     /* background-color: #191c1b; */
     background-color: #090e12;
+    margin: 1em;
+    width: auto;
 }
 
 /* .container {
@@ -26,14 +28,15 @@ html{
 .mainheading {
     font-family: Ubuntu Mono;
     /* font-family: Consolas; */
-    border: 5px solid #169299;
+    /* border: 5px solid #169299; */
+    border: 2px solid #0f5054;
     padding: 10px;
     color: red;
     text-align: center;
     border-radius: 15px;
 }
 
-.maintext {
+.basic {
     color: white;
     font-family: Consolas;
 }
@@ -44,12 +47,7 @@ html{
     text-decoration: underline;
 }
 
-.basic{
-    color: white;
-    font-family: Consolas;
-}
-
-code{
+.codeblock{
     color: white;
     background-color: #1e2327;
     /* background-color: #1b1b21; */
@@ -67,7 +65,6 @@ table, th, td{
     padding: 5px;
     font-size: 0.9em;
 }
-
 </style>
 
 <!-- https://stackoverflow.com/questions/10379015/how-to-use-code-blocks-in-html -->
@@ -89,7 +86,7 @@ table, th, td{
 <h1 class=mainheading>Introduction</h1>
 
 
-<p class=maintext>
+<p class=basic>
 Hello there! This is a site for, well, cat images and videos.
 There are currently {{shit_to_be_filled_out_in_python}} images and videos present in the library.
 This website is open source (<a href="https://github.com/msr8/catapi" target="_blank">https://github.com/msr8/catapi</a>)
@@ -107,10 +104,10 @@ Sometimes what I like to do is just visit /random and just keep refreshing and e
 <a href="{{DOMAIN}}/random" target="_blank"><h2 class="endpoints">/random</h2></a>
 <details class="basic">
 <summary>Info</summary>
-    <p class=maintext>
-        <b>Methods:</b> GET
+    <p class=basic>
+        <b>Methods:</b> GET and POST
         <br><br>
-        <b>Parameters</b>:
+        <b>Parameters:</b>
         <table>
             <tr>
                 <th>Location</th>
@@ -121,40 +118,89 @@ Sometimes what I like to do is just visit /random and just keep refreshing and e
                 <th>Example</th>
             </tr>
             <tr>
-                <td>URL</td>
-                <td>ext</td>
-                <td>string</td>
-                <td>jpg,jpeg,png,mp4</td>
-                <td>The extension of the image to be returned. You can allow multiple extensions by seperating them with a comma</td>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">ext</td>
+                <td rowspan="2">string</td>
+                <td rowspan="2">jpg,jpeg,png,mp4</td>
+                <td rowspan="2">The extension of the image to be returned. You can allow multiple extensions by seperating them with a comma</td>
                 <td>/random?ext=png,jpg,jpeg</td>
             </tr>
             <tr>
-                <td>URL</td>
-                <td>max_size</td>
-                <td>int</td>
-                <td>None (no limit)</td>
-                <td>The maximum size of image to be returned (in bytes)</td>
+                <td>{'ext' : 'png,jpg,jpeg'}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">max_size</td>
+                <td rowspan="2">int</td>
+                <td rowspan="2">None (no limit)</td>
+                <td rowspan="2">The maximum size of image to be returned (in bytes)</td>
                 <td>/random?max_size=8000000</td>
             </tr>
             <tr>
-                <td>URL</td>
-                <td>redirect</td>
-                <td>bool</td>
-                <td>False</td>
-                <td>Wether to redirect the user to the /library endpoint</td>
+                <td>{'max_size' : 8000000}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">redirect</td>
+                <td rowspan="2">bool</td>
+                <td rowspan="2">False</td>
+                <td rowspan="2">Wether to redirect the user to the /library endpoint</td>
                 <td>/random?redirect=True</td>
+            </tr>
+            <tr>
+                <td>{'redirect' : True}</td>
             </tr>
         </table>
         <br><br>
-        <b>Sample request:</b>
-        <br><br>
-        <code>
+        <b>Sample requests:</b>
+        <p class="codeblock">
+            # To get a random image/video
+            <br>
             curl {{DOMAIN}}/random
-        </code>
-        <br><br><br>
+            <br>
+            # To get a random video
+            <br>
+            curl {{DOMAIN}}/random?ext=mp4
+            <br>
+            curl {{DOMAIN}}/random -d ext=mp4
+            <br>
+            # To get a random image/video with a maximum size of 8MB
+            <br>
+            curl {{DOMAIN}}/random?max_size=8000000
+            <br>
+            curl {{DOMAIN}}/random -d max_size=8000000
+            <br>
+        </p>
+        <br>
         <b>Sample output:</b>
         <br>
-        <img src="{{DOMAIN}}/library/acasy9YlEgPkHDpAf1l_YuSkqG8zskBTbI-5a1jJMT8.png" alt="Random cat" width="500" height="500">
+        <p class="codeblock">
+            &lthtml&gt
+            <br>&lthead&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&lttitle&gt0acro5hgkzs81.png&lt/title&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&ltstyle&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*&nbsp{
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmargin:&nbsp0;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsppadding:&nbsp0;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp.imgbox&nbsp{
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdisplay:&nbspgrid;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspheight:&nbsp100%;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp.center-fit&nbsp{
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmax-width:&nbsp100%;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmax-height:&nbsp100vh;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmargin:&nbspauto;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}
+            <br>&nbsp&nbsp&nbsp&nbsp&lt/style&gt
+            <br>&lt/head&gt
+            <br>&ltbody&gt
+            <br>&ltdiv&nbspclass="imgbox"&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&ltimg&nbspclass="center-fit"&nbspsrc='/library/0acro5hgkzs81.png'&gt
+            <br>&lt/div&gt
+            <br>&lt/body&gt
+            <br>&lt/html&gt
+        </p>
     </p>
 </details>
 
