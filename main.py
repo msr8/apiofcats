@@ -14,8 +14,8 @@ import os
 EYEBLEACH_PATH = '/Users/ravi/Pictures/Eyebleach'
 STATIC = os.path.join( os.path.dirname(__file__) , 'static' )
 # EYEBLEACH_PATH = os.path.join( os.path.dirname(__file__) , 'Eyebleach' )
-# DOMAIN = 'http://127.0.0.1:5000'
-DOMAIN = 'https://7fbf-2401-4900-1c62-fff2-c22-1c93-dcb0-4d6a.in.ngrok.io'
+DOMAIN = 'http://127.0.0.1'
+# DOMAIN = 'https://7fbf-2401-4900-1c62-fff2-c22-1c93-dcb0-4d6a.in.ngrok.io'
 DEFAULT_EXTS = ['png','jpg','jpeg','mp4']
 app = Flask(__name__)
 api = Api(app)
@@ -37,7 +37,7 @@ printf(f'[gray50][CONFIG] Default extensions:  {", ".join(DEFAULT_EXTS)}[/]')
 
 
 class Random(Resource):
-    def get(self):
+    def func(self):
         # Gets the arguments
         ext, max_size, _, amount = process_arguments(request_api, DEFAULT_EXTS)
         # Gets the file stuff
@@ -50,12 +50,16 @@ class Random(Resource):
             del dic['fp']
         # Returns the data
         return { 'amount':len(files) , 'files':files }
+
+    def get(self):     return self.func()
+    def post(self):    return self.func()
+
 api.add_resource(Random, '/api/random')
 
 
 
 class Stats(Resource):
-    def get(self):
+    def func(self):
         # Gets the extensions
         exts = get_exts(EYEBLEACH_PATH)
         # Gets the number of total files
@@ -66,6 +70,10 @@ class Stats(Resource):
             'filecount':   exts,
             'total_files': total
         }
+
+    def get(self):     return self.func()
+    def post(self):    return self.func()
+
 api.add_resource(Stats, '/api/stats')
 
 
@@ -78,6 +86,9 @@ def favicon():
 
 @app.route('/', methods=["GET", "POST"])
 def page_home():
+    exts = get_exts(EYEBLEACH_PATH)
+    total = sum(exts.values())
+    return render_template('home.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
     return 'Hello :)'
 
 
@@ -86,9 +97,6 @@ def page_home():
 def page_random():
     # Gets all the args
     ext, max_size, redirect_arg, _ = process_arguments(request, DEFAULT_EXTS)
-    print(request.args.get('ext'))
-    print(request_api.form.get('ext'))
-    print(ext)
     # Gets the file
     try:       file_dic = get_file_path(EYEBLEACH_PATH, max_size=max_size, allowed_exts=ext)[0]
     # If there is an error processing the arguments, shows error
@@ -113,7 +121,7 @@ def page_library(fname):
 
 @app.route('/test<arg1>')
 def page_test(arg1):
-    return render_template('photo.html', arg1=arg1)
+    return render_template('image.html', arg1=arg1)
 
 
 
@@ -125,9 +133,9 @@ def page_test(arg1):
 if __name__ == '__main__':
 
     # from waitress import serve
-    # serve(app, port=5000, host='0.0.0.0')
+    # serve(app, port=80, host='0.0.0.0')
     
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=80, host='0.0.0.0')
     
 
 
@@ -138,10 +146,8 @@ if __name__ == '__main__':
 
 
 '''
--> Add /
--> Add /docs
 -> Logging
--> Improve /stats
+-> Improve /stats (how??)
 -> Add library exploring
 -> Check if the max_size given is an int, and None
 
