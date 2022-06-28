@@ -149,9 +149,8 @@ if __name__ == '__main__':
 -> Logging
 -> Improve /stats (how??)
 -> Add library exploring
--> Check if the max_size given is an int, and None
 
-http://127.0.0.1:5000/library/ead9beic1jh71.jpeg
+http://127.0.0.1/library/ead9beic1jh71.jpeg
 '''
 
 
