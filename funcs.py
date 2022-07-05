@@ -49,11 +49,13 @@ def process_arguments(request, DEFAULT_EXTS:list) -> tuple:
     max_size          =  args.get('max_size')
     redirect_arg      =  args.get('redirect')
     amount            =  args.get('amount')
+    # Converts ints to string
+    max_size, amount = str(max_size), str(amount)
     # Processes the arguments
     ext:list          =  ext.split(',') if ext else DEFAULT_EXTS
-    max_size          =  int(max_size) if max_size else None
+    max_size          =  int(max_size) if max_size.isdigit() else None
     redirect_arg:bool =  True if redirect_arg=='true' or redirect_arg=='True' else False
-    amount:int        =  int(amount) if amount else 1
+    amount:int        =  int(amount) if amount.isdigit() else 1
     # Returns the arguments
     return ext, max_size, redirect_arg, amount
 
