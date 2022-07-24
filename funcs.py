@@ -33,7 +33,7 @@ def get_file_path(eyebleach_path:str,
         # Adds the file info to the list
         files.append({'fp':fp, 'fname':fname, 'ext':ext, 'size':size})
         # If the amount of files is reached, it breaks the loop
-        if file_count == amount:    break
+        if file_count >= amount:    break
 
     # If no valid file was found, returns None
     if not valid_file_found:    return None

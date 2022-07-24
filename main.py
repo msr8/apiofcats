@@ -67,8 +67,8 @@ class Stats(Resource):
         # Returns the info
         return {
             'domain':      DOMAIN, 
+            'total_files': total,
             'filecount':   exts,
-            'total_files': total
         }
 
     def get(self):     return self.func()
@@ -150,6 +150,9 @@ if __name__ == '__main__':
 -> Logging
 -> Improve /stats (how??)
 -> Add library exploring
+-> Rewrite sample output in /api/random once bought the domain
+
+-> if amount=0, it sends everything (fixed it now I think)
 
 http://127.0.0.1/library/ead9beic1jh71.jpeg
 '''
