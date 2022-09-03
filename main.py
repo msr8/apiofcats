@@ -1,28 +1,44 @@
-from flask import Flask, send_file, send_from_directory, redirect, url_for, render_template, request
-from flask_restful import Api, Resource
+from flask         import Flask, send_file, send_from_directory, redirect, url_for, render_template, request
 from flask_restful import request as request_api
-from rich import print as printf
+from rich          import print as printf
+from flask_restful import Api, Resource
 
-from funcs import get_file_path, process_arguments, get_exts
-import os
+from funcs import get_file_path, process_arguments, get_exts, logme
+
+import time as t
+import json, os
 
 
 
 
 
 
-EYEBLEACH_PATH = '/Users/ravi/Pictures/Eyebleach'
-STATIC = os.path.join( os.path.dirname(__file__) , 'static' )
-# EYEBLEACH_PATH = os.path.join( os.path.dirname(__file__) , 'Eyebleach' )
-DOMAIN = 'http://127.0.0.1'
-# DOMAIN = 'https://7fbf-2401-4900-1c62-fff2-c22-1c93-dcb0-4d6a.in.ngrok.io'
-DEFAULT_EXTS = ['png','jpg','jpeg','mp4']
 app = Flask(__name__)
 api = Api(app)
+
+
+
+
+CONFIG_FP = os.path.join( os.path.dirname(__file__) , 'config.json' )
+STATIC    = os.path.join( os.path.dirname(__file__) , 'static' )
+LOG_DIR   = os.path.join( os.path.dirname(__file__) , 'logs' )
+LOG_FP    = os.path.join( LOG_DIR ,                    f'{int(t.time())}.txt' )
+DEFAULT_EXTS = ['png','jpg','jpeg','mp4']
+
+
+# Loads config
+with open(CONFIG_FP) as f:    CONFIG = json.load(f)
+EYEBLEACH_PATH = CONFIG['eyebleach_path']
+DOMAIN         = CONFIG['domain']
+
+# Makes log dir
+os.makedirs(LOG_DIR, exist_ok=True)
+log_fp = LOG_FP
 
 printf(f'[gray50][CONFIG] Eyebleach path:      [u]{EYEBLEACH_PATH}[/][/]')
 printf(f'[gray50][CONFIG] Domain:              {DOMAIN}[/]')
 printf(f'[gray50][CONFIG] Default extensions:  {", ".join(DEFAULT_EXTS)}[/]')
+# printf(f'\n')
 
 
 
@@ -46,8 +62,15 @@ class Random(Resource):
         if not files:    return {'error':'No file found satisfying the given parameters'}
         # Goes thro the dictionaries present in the list, deletes all file paths, and adds URLs
         for dic in files:
-            dic['url'] = f'{DOMAIN}/{dic["fname"]}'
+            dic['url'] = f'{DOMAIN}/library/{dic["fname"]}'
             del dic['fp']
+        # Logs it
+
+        # Get the body args. If url args are given, dont print the body args. Then if no body args are given, prints an empty string
+        args  = request_api.form
+        extra = '' if request_api.args  else args.to_dict()
+        extra = '' if not extra         else extra
+        logme(request, log_fp, extra)
         # Returns the data
         return { 'amount':len(files) , 'files':files }
 
@@ -60,6 +83,7 @@ api.add_resource(Random, '/api/random')
 
 class Stats(Resource):
     def func(self):
+        logme(request, log_fp)
         # Gets the extensions
         exts = get_exts(EYEBLEACH_PATH)
         # Gets the number of total files
@@ -86,6 +110,7 @@ def favicon():
 
 @app.route('/', methods=["GET", "POST"])
 def page_home():
+    logme(request, log_fp)
     exts = get_exts(EYEBLEACH_PATH)
     total = sum(exts.values())
     return render_template('home.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
@@ -105,22 +130,28 @@ def page_random():
     if not file_dic:    return send_from_directory(STATIC, 'error.jpg')
     # Gets the file info
     fp, fname, file_ext = file_dic['fp'], file_dic['fname'], file_dic['ext']
+    # Logs it
+    logme(request, log_fp, f'[orange3]({fname})[/]')
     # If the redirect arg is given, redirects
     if redirect_arg:    return redirect( url_for('page_library',fname=fname) )
     # Else, displays the media
-    # return send_file(fp)
     html_file = 'video.html' if file_ext == 'mp4' else 'image.html'
     return render_template(html_file, fname=fname, url=f'/library/{fname}')
-    return render_template(html_file, fname=fname, url=fp)
+
 
 
 @app.route('/library/<fname>', methods=["GET", "POST"])
 def page_library(fname):
+    # logme(request)
+    # print(request.user_agent)
+    # print(type(request.user_agent))
+    # print(request.user_agent.string)
     return send_from_directory(EYEBLEACH_PATH, fname)
 
 
 @app.route('/test<arg1>')
 def page_test(arg1):
+    logme(request, log_fp)
     return render_template('image.html', arg1=arg1)
 
 
@@ -135,8 +166,8 @@ if __name__ == '__main__':
     # from waitress import serve
     # serve(app, port=80, host='0.0.0.0')
     
-    # app.run(debug=True, port=80, host='0.0.0.0')
-    app.run()
+    app.run(debug=True, port=80, host='0.0.0.0')
+    # app.run()
     
 
 
@@ -147,12 +178,17 @@ if __name__ == '__main__':
 
 
 '''
--> Logging
--> Improve /stats (how??)
+CODING BASED
+->
+SERVER BASED
+-> Change password of root and mark in server
+-> Add keybased SSH authentication
+LONG ASS SHIT
 -> Add library exploring
--> Rewrite sample output in /api/random once bought the domain
+-> Add /stats ie just a fancy version of /api/stats
 
--> if amount=0, it sends everything (fixed it now I think)
+
+
 
 http://127.0.0.1/library/ead9beic1jh71.jpeg
 '''
