@@ -70,7 +70,7 @@ class Random(Resource):
         args  = request_api.form
         extra = '' if request_api.args  else args.to_dict()
         extra = '' if not extra         else extra
-        logme(request, log_fp, extra)
+        logme(request, log_fp, DOMAIN, extra)
         # Returns the data
         return { 'amount':len(files) , 'files':files }
 
@@ -83,7 +83,7 @@ api.add_resource(Random, '/api/random')
 
 class Stats(Resource):
     def func(self):
-        logme(request, log_fp)
+        logme(request, log_fp, DOMAIN)
         # Gets the extensions
         exts = get_exts(EYEBLEACH_PATH)
         # Gets the number of total files
@@ -110,7 +110,7 @@ def favicon():
 
 @app.route('/', methods=["GET", "POST"])
 def page_home():
-    logme(request, log_fp)
+    logme(request, log_fp, DOMAIN)
     exts = get_exts(EYEBLEACH_PATH)
     total = sum(exts.values())
     return render_template('home.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
@@ -131,7 +131,7 @@ def page_random():
     # Gets the file info
     fp, fname, file_ext = file_dic['fp'], file_dic['fname'], file_dic['ext']
     # Logs it
-    logme(request, log_fp, f'[orange3]({fname})[/]')
+    logme(request, log_fp, DOMAIN, f'[orange3]({fname})[/]')
     # If the redirect arg is given, redirects
     if redirect_arg:    return redirect( url_for('page_library',fname=fname) )
     # Else, displays the media
@@ -151,7 +151,7 @@ def page_library(fname):
 
 @app.route('/test<arg1>')
 def page_test(arg1):
-    logme(request, log_fp)
+    logme(request, log_fp, DOMAIN)
     return render_template('image.html', arg1=arg1)
 
 

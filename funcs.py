@@ -83,7 +83,7 @@ def get_exts(eyebleach_path:str) -> dict:
 
 
 
-def logme(request, log_fp:str, extra:str=''):
+def logme(request, log_fp:str, domain, extra:str=''):
     # Gets all the attributes
     ts  = get_ts()
     url = request.url.replace(request.host_url, '')
@@ -92,7 +92,9 @@ def logme(request, log_fp:str, extra:str=''):
     # Enchancements
     ip  = ip  + ' ' * ( 15-len(ip) )
     url = url + ' ' * ( max( 10-len(url) , 0 ) ) 
-    ref = '' if not ref else f'({ref}) '
+    ref = ''      if  domain in ref  else ref
+    ref = ''      if  not ref        else f'({ref}) '
+    url = url[1:] if  url=='/'       else url          # there was a weird bug where there is an extra space when I visit /         
     # Generates the text
     text = f'[grey50][{ts}][/]  [blue3]{ip}[/] -- [magenta1]/{url}[/] [chartreuse4]{ref}[/]{extra}'
     # Prints it and saves to file
