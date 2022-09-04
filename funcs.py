@@ -91,17 +91,16 @@ def logme(request, log_fp:str, domain, extra:str=''):
     ref = request.referrer
     # Enchancements
     ip  = ip  + ' ' * ( 15-len(ip) )
-    url = url + 'p' * ( max( 10-len(url) , 0 ) ) 
-    ref = ''      if  domain in f'{ref}'    else ref
-    with open(log_fp, 'a') as f: f.write(f'ref')
-    ref = ''      if  not ref               else f'({ref})k'
-    # url = url[1:] if  url.startswith('/ ')  else url          # there was a weird bug where there is an extra space when I visit /         
+    url = url + ' ' * ( max( 10-len(url) , 0 ) ) 
+    ext = f'{ext} '  if  ext                   else ext           # So that the logs are aligned when no extra is given
+    ref = ''         if  domain in f'{ref}'    else ref
+    ref = ''         if  not ref               else f'({ref}) '      
     # Generates the text
     text = f'[grey50][{ts}][/]  [blue3]{ip}[/] -- [magenta1]/{url}[/] [chartreuse4]{ref}[/]{extra}'
     # Prints it and saves to file
     printf(text)
     with open(log_fp, 'a') as f:
-        f.write(f'{text} -- [light_steel_blue]{request.user_agent.string} {request.accept_languages.__str__()}[/]\n')
+        f.write(f'{text}-- [light_steel_blue]{request.user_agent.string} {request.accept_languages.__str__()}[/]\n')
         # extra = extra.replace('[/]','').replace('[orange3]','')
         # f.write(f'[{ts}]  {ip}-- {ref}/{url} {extra} -- {request.user_agent.string} {request.accept_languages.__str__()}\n')
 
