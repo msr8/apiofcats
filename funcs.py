@@ -92,11 +92,11 @@ def logme(request, log_fp:str, domain, extra:str=''):
     # Enchancements
     ip  = ip  + ' ' * ( 15-len(ip) )
     url = url + ' ' * ( max( 10-len(url) , 0 ) ) 
-    ext = f'{ext} '  if  ext                   else ext           # So that the logs are aligned when no extra is given
-    ref = ''         if  domain in f'{ref}'    else ref
-    ref = ''         if  not ref               else f'({ref}) '      
+    ext = f'{extra} '  if  extra                 else extra           # So that the logs are aligned when no extra is given
+    ref = ''           if  domain in f'{ref}'    else ref
+    ref = ''           if  not ref               else f'({ref}) '      
     # Generates the text
-    text = f'[grey50][{ts}][/]  [blue3]{ip}[/] -- [magenta1]/{url}[/] [chartreuse4]{ref}[/]{extra}'
+    text = f'[grey50][{ts}][/]  [blue3]{ip}[/] -- [magenta1]/{url}[/] [chartreuse4]{ref}[/]{ext}'
     # Prints it and saves to file
     printf(text)
     with open(log_fp, 'a') as f:
