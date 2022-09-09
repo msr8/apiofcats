@@ -120,7 +120,7 @@ def page_home():
 
 @app.route('/stats', methods=["GET", "POST"])
 def page_stats():
-    return Stats.func()
+    return Stats().func()
 
 
 
