@@ -21,8 +21,9 @@ api = Api(app)
 
 CONFIG_FP = os.path.join( os.path.dirname(__file__) , 'config.json' )
 STATIC    = os.path.join( os.path.dirname(__file__) , 'static' )
-LOG_DIR   = os.path.join( os.path.dirname(__file__) , 'logs' )
-LOG_FP    = os.path.join( LOG_DIR ,                    f'{int(t.time())}.txt' )
+# LOG_DIR = os.path.join( os.path.dirname(__file__) , 'logs' )
+# LOG_FP  = os.path.join( LOG_DIR ,                    f'{int(t.time())}.txt' )
+LOG_FP    = os.path.join( os.path.dirname(__file__) , 'log.txt' )
 DEFAULT_EXTS = ['png','jpg','jpeg','mp4']
 
 
