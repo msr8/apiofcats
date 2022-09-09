@@ -5,7 +5,6 @@ from flask_restful import Api, Resource
 
 from funcs import get_file_path, process_arguments, get_exts, logme
 
-import time as t
 import json, os
 
 
@@ -33,7 +32,7 @@ EYEBLEACH_PATH = CONFIG['eyebleach_path']
 DOMAIN         = CONFIG['domain']
 
 # Makes log dir
-os.makedirs(LOG_DIR, exist_ok=True)
+# os.makedirs(LOG_DIR, exist_ok=True)
 log_fp = LOG_FP
 
 printf(f'[gray50][CONFIG] Eyebleach path:      [u]{EYEBLEACH_PATH}[/][/]')
@@ -99,6 +98,7 @@ class Stats(Resource):
     def get(self):     return self.func()
     def post(self):    return self.func()
 
+api.add_resource(Stats, '/stats')
 api.add_resource(Stats, '/api/stats')
 
 
