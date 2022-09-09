@@ -13,13 +13,12 @@
 
    <br>
 
-   [ ![img](./static/logo.png) ](https://apiofcats.xyz)
-
-   <br>
-   
+   <!-- [ ![img](./static/logo.png) ](https://apiofcats.xyz) -->
    <img src='./static/logo.png' alt='apiofcats.xyz' width=300>
 
 </div>
+
+<br>
 
 # Introduction
 
