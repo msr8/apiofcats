@@ -14,7 +14,10 @@
    <br>
 
    <!-- [ ![img](./static/logo.png) ](https://apiofcats.xyz) -->
+
+   <a href="https://apiofcats.xyz">
    <img src='./static/logo.png' alt='apiofcats.xyz' width=300>
+   </a>
 
 </div>
 
