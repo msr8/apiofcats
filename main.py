@@ -98,7 +98,6 @@ class Stats(Resource):
     def get(self):     return self.func()
     def post(self):    return self.func()
 
-api.add_resource(Stats, '/stats')
 api.add_resource(Stats, '/api/stats')
 
 
@@ -116,6 +115,12 @@ def page_home():
     total = sum(exts.values())
     return render_template('home.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
     return 'Hello :)'
+
+
+
+@app.route('/stats', methods=["GET", "POST"])
+def page_stats():
+    return Stats.func()
 
 
 
