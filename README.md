@@ -27,6 +27,26 @@
 
 Hello there! This github repo contaisn the source code of [apiofcats.xyz](https://apiofcats.xyz), ie a site for cat images and videos. If you want to check out a random picture/video present in the library, you can do so by going to [/random](https://apiofcats.xyz/random). Once there, you can constantly refresh the page (ctrl+R or cmd+R) to get new cat pics/vids :). There are currently over 3500 images and videos present in the evergrowing library. I got all of them through public sources (mostly reddit) and I DO NOT claim ownership of any of them
 
+<br>
+
+# Endpoints
+
+**NOTE:** For the full documentation, please visit the [site](https://apiofcats.xyz), this is just a short summary on what each endpoint does
+
+<br>
+
+[/random](https://apiofcats.xyz/random): Shows a random cat image/video
+
+[/library/\<fname>](https://apiofcats.xyz/library/t8yrn2dpk8081.jpeg): The endpoint to access all the photos/videos available
+
+[/stats](https://apiofcats.xyz/stats): Just a mirror of [/api/stats](https://apiofcats.xyz/api/stats)
+
+[/api/random](https://apiofcats.xyz/api/random): Basically the API version of the [/random](https://apiofcats.xyz/random) endpoint
+
+[/api/stats](https://apiofcats.xyz/api/stats): Displays information like the domain, total files, and the composition of all the extensions
+
+
+
 
 
 
