@@ -113,7 +113,8 @@ def page_home():
     logme(request, log_fp, DOMAIN)
     exts = get_exts(EYEBLEACH_PATH)
     total = sum(exts.values())
-    return render_template('home.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
+    # return render_template('home.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
+    return render_template('home2.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
     return 'Hello :)'
 
 

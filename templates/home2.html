@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cats!!</title>
+    <link rel="stylesheet" href="App.css">
+    <link rel="stylesheet" href="<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400,700, 800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200;1,600&display=swap" rel="stylesheet">
+</head>
+
+<!-- <div class="footerimages">
+    <img src="https://img.shields.io/github/stars/msr8/catapi?color=3E3E3E&labelColor=302D41&style=for-the-badge">
+    <img src="https://img.shields.io/github/last-commit/msr8/markify?color=2F2F2F&labelColor=302D41&style=for-the-badge">   
+    <img src="https://img.shields.io/github/issues/msr8/markify?color=202020&labelColor=302D41&style=for-the-badge">
+</div>
+<br><br> -->
+
+<body>
+<main>
+<h2 class="mainheading">Introduction</h2>
+<p class=basic>
+Hello there! This is a site for cat images and videos.
+If you want to check out a random picture/video present in the library, you can do so by clicking on the "Random Cat" button
+which will take you to <a href="/random" target="_blank">/random</a>.
+Once there, you can constantly refresh the page (ctrl+R or cmd+R) to load new cat pics/vids :).
+There are currently {{shit_to_be_filled_out_in_python}} images and videos present in the evergrowing library.
+This website is <a href="https://github.com/msr8/catapi" target="_blank">open source</a>
+so feel absolutely free to check out the code, report an issue, or contribute towards it.
+I got all the images/videos through public sources (mostly reddit) and I DO NOT claim ownership of any of them.
+</p>
+
+
+
+<form action="/random">
+<br><br><br><br><br><br><br><br>
+<button class = "basiccenterthatshit" name="/random">Random Cat</button>
+</form>
+</main>
+
+<br><br><br><br><br><br>
+
+
+
+
+
+<section class="section2">
+<h2 class=mainheading>Endpoints</h2>
+<p class="codeblock">
+<b>NOTE:</b> BODY arguments are discarded/ignored if <b>ANY</b> URL arguments are given, even invalid ones
+</p>
+</section>
+
+
+
+<footer>
+<ul>
+<a href="/random" target="_blank"><h2 class="endpoints">/random</h2></a>
+<li>
+    <details class="basic">
+    <summary>Info</summary>
+    <p class="basic">
+        <b>Description:</b> Shows a random cat image/video
+        <br>
+        <b>Methods:</b> GET and POST
+        <br>
+        <b>Parameters:</b>
+        <br>
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">ext</td>
+                <td rowspan="2">string</td>
+                <td rowspan="2">jpg,jpeg,png,mp4</td>
+                <td rowspan="2">The extension of the image to be returned. You can allow multiple extensions by seperating them with a comma</td>
+                <td>/random?ext=png,jpg,jpeg</td>
+            </tr>
+            <tr>
+                <td>{'ext' : 'png,jpg,jpeg'}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">max_size</td>
+                <td rowspan="2">int</td>
+                <td rowspan="2">None (no limit)</td>
+                <td rowspan="2">The maximum size of image to be returned (in bytes)</td>
+                <td>/random?max_size=8000000</td>
+            </tr>
+            <tr>
+                <td>{'max_size' : 8000000}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">redirect</td>
+                <td rowspan="2">bool</td>
+                <td rowspan="2">False</td>
+                <td rowspan="2">Wether to redirect the user to the /library endpoint</td>
+                <td>/random?redirect=True</td>
+            </tr>
+            <tr>
+                <td>{'redirect' : True}</td>
+            </tr>
+        </table>
+        <br><br>
+        <b>Sample requests:</b>
+        <p class="codeblock">
+            # To get a random image/video
+            <br>
+            curl {{DOMAIN}}/random
+            <br>
+            # To get a random video
+            <br>
+            curl {{DOMAIN}}/random?ext=mp4
+            <br>
+            curl {{DOMAIN}}/random -d ext=mp4
+            <br>
+            # To get a random image/video with a maximum size of 8MB
+            <br>
+            curl {{DOMAIN}}/random?max_size=8000000
+            <br>
+            curl {{DOMAIN}}/random -d max_size=8000000
+            <br>
+        </p>
+        <br>
+        <b>Sample output:</b>
+        <br>
+        (This returns an html page containing some styling and either an &ltimg&gt or &ltvideo&gt tag)
+        <p class="codeblock">
+            &lthtml&gt
+            <br>&lthead&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&lttitle&gt0acro5hgkzs81.png&lt/title&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&ltstyle&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*&nbsp{
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmargin:&nbsp0;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsppadding:&nbsp0;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp.imgbox&nbsp{
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdisplay:&nbspgrid;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspheight:&nbsp100%;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp.center-fit&nbsp{
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmax-width:&nbsp100%;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmax-height:&nbsp100vh;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmargin:&nbspauto;
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}
+            <br>&nbsp&nbsp&nbsp&nbsp&lt/style&gt
+            <br>&lt/head&gt
+            <br>&ltbody&gt
+            <br>&ltdiv&nbspclass="imgbox"&gt
+            <br>&nbsp&nbsp&nbsp&nbsp&ltimg&nbspclass="center-fit"&nbspsrc='/library/0acro5hgkzs81.png'&gt
+            <br>&lt/div&gt
+            <br>&lt/body&gt
+            <br>&lt/html&gt
+        </p>
+    </p>
+    </div>
+</details>
+</li>
+</ul>
+
+<ul>
+<a href="/library/t8yrn2dpk8081.jpeg" target="_blank"><h2 class="endpoints">/library/&ltfname></h2></a>
+<li>
+    <details class="basic">
+    <summary>Info</summary>
+    <p class=basic>
+        <b>Description:</b> The endpoint to access all the photos/videos available
+        <br>
+        <b>Methods:</b> GET and POST
+        <br>
+        <b>Parameters:</b>
+        <br>
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>URL</td>
+                <td>fname</td>
+                <td>string</td>
+                <td>The name of the file</td>
+                <td>/library/t8yrn2dpk8081.jpeg</td>
+        </table>
+        <br><br>
+        <b>Sample requests:</b>
+        <p class="codeblock">
+            # To get the file named t8yrn2dpk8081.jpeg
+            <br>
+            curl {{DOMAIN}}/library/t8yrn2dpk8081.jpeg
+        </p>
+        <br>
+        <b>Sample output:</b>
+        <br>
+        <img src="/library/t8yrn2dpk8081.jpeg"></img>
+    </p>
+</details>
+</li>
+</ul>
+
+<ul>
+<a href="/stats" target="_blank"><h2 class="endpoints">/stats</h2></a>
+<li>    
+    <details class="basic">    
+    <summary>Info</summary>
+    <p class=basic>
+        <b>Description:</b> Just a mirror of <a href="/api/stats">/api/stats</a>
+    </p>
+</details>
+</li>
+</ul>
+
+
+<ul>
+<a href="/api/random" target="_blank"><h2 class="endpoints">/api/random</h2></a>
+<li>
+    <details class="basic">
+    <summary>Info</summary>
+    <p class=basic>
+        <b>Description:</b> Basically the API version of the <a href='/random'>/random</a> endpoint
+        <br>
+        <b>Methods:</b> GET and POST
+        <br>
+        <b>Parameters:</b>
+        <br>
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">ext</td>
+                <td rowspan="2">string</td>
+                <td rowspan="2">jpg,jpeg,png,mp4</td>
+                <td rowspan="2">The extension of the image to be returned. You can allow multiple extensions by seperating them with a comma</td>
+                <td>/api/random?ext=png,jpg,jpeg</td>
+            </tr>
+            <tr>
+                <td>{'ext' : 'png,jpg,jpeg'}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">max_size</td>
+                <td rowspan="2">int</td>
+                <td rowspan="2">None (no limit)</td>
+                <td rowspan="2">The maximum size of image to be returned (in bytes)</td>
+                <td>/api/random?max_size=8000000</td>
+            </tr>
+            <tr>
+                <td>{'amount' : 5}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">URL & BODY</td>
+                <td rowspan="2">amount</td>
+                <td rowspan="2">int</td>
+                <td rowspan="2">1</td>
+                <td rowspan="2">amount of media returned</td>
+                <td>/api/random?amount=5</td>
+            </tr>
+            <tr>
+                <td>{'redirect' : True}</td>
+            </tr>
+        </table>
+        <br><br>
+        <b>Sample requests:</b>
+        <p class="codeblock">
+            # To get a random image/video
+            <br>
+            curl {{DOMAIN}}/api/random
+            <br>
+            # To get a random video
+            <br>
+            curl {{DOMAIN}}/api/random?ext=mp4
+            <br>
+            curl {{DOMAIN}}/api/random -d ext=mp4
+            <br>
+            # To get a random image/video with a maximum size of 8MB
+            <br>
+            curl {{DOMAIN}}/api/random?max_size=8000000
+            <br>
+            curl {{DOMAIN}}/api/random -d max_size=8000000
+            <br>
+            # To get 5 random images/videos
+            <br>
+            curl {{DOMAIN}}/api/random?amount=5
+            <br>
+            curl {{DOMAIN}}/api/random -d amount=5
+        </p>
+        <br>
+        <b>Sample output:</b>
+        <br>
+        (This returns a dictionary containing two keys)
+        <br><br>
+        <table>
+            <tr>
+                <th>Key</th>
+                <th>Value Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>amount</td>
+                <td>int</td>
+                <td>The amount of files returned</td>
+            </tr>
+            <tr>
+                <td>files</td>
+                <td>list</td>
+                <td>A list of dictionaries, containing the keys "fname" (filename), "ext" (extension), "size" (size of the file in bytes), and "url" (URL to the file)</td>
+            </tr>
+        </table>
+        <p class="codeblock">
+            {
+                <br>&nbsp&nbsp&nbsp&nbsp"amount":&nbsp3,
+                <br>&nbsp&nbsp&nbsp&nbsp"files":&nbsp[
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"fname":&nbsp"mj9vanrcp9u71.jpeg",
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ext":&nbsp"jpeg",
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"size":&nbsp92630,
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"url":&nbsp"https://apiofcats.xyz/library/mj9vanrcp9u71.jpeg"
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"fname":&nbsp"qo2sxrajhu591.png",
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ext":&nbsp"png",
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"size":&nbsp442339,
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"url":&nbsp"https://apiofcats.xyz/library/qo2sxrajhu591.png"
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"fname":&nbsp"7kqwu3svezt71.mp4",
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ext":&nbsp"mp4",
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"size":&nbsp292188,
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"url":&nbsp"https://apiofcats.xyz/library/7kqwu3svezt71.mp4"
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}
+                <br>&nbsp&nbsp&nbsp&nbsp]
+                <br>}
+        </p>
+    </p>
+</details>
+</li>
+</ul>
+
+<ul>
+<a href="/api/stats" target="_blank"><h2 class="endpoints">/api/stats</h2></a>
+<li>
+    <details class="basic">
+    <summary>Info</summary>
+    <p class=basic>
+        <b>Description:</b> Displays information like the domain, total files, and the composition of all the extensions
+        <br>
+        <b>Methods:</b> GET and POST
+        <br>
+        <b>Parameters:</b> None
+        <br>
+        <b>Sample requests:</b>
+        <p class="codeblock">
+            # To get the current stats
+            <br>
+            curl {{DOMAIN}}/api/stats
+        </p>
+        <br>
+        <b>Sample output:</b>
+        <br>
+        (This returns a dictionary containing three keys)
+        <br><br>
+        <table>
+            <tr>
+                <th>Key</th>
+                <th>Value Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>domain</td>
+                <td>string</td>
+                <td>The domain you can access this website from</td>
+            </tr>
+            <tr>
+                <td>filecount</td>
+                <td>list</td>
+                <td>A dictionary containing file extensions as keys and their count as the values</td>
+            </tr>
+            <tr>
+                <td>total_files</td>
+                <td>int</td>
+                <td>The total number of files</td>
+            </tr>
+        </table>
+        <p class="codeblock">
+            {
+                <br>&nbsp&nbsp&nbsp&nbsp"domain":&nbsp"https://catsapi.xyz",
+                <br>&nbsp&nbsp&nbsp&nbsp"filecount":&nbsp{
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"jpeg":&nbsp1470,
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"png":&nbsp376,
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mp4":&nbsp768,
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"jpg":&nbsp5
+                <br>&nbsp&nbsp&nbsp&nbsp},
+                <br>&nbsp&nbsp&nbsp&nbsp"total_files":&nbsp2619
+                <br>}
+        </p>
+    </p>
+</details>
+</li>
+</ul>
+</footer>
+
+<br><br><br>
+<div class="footerimages">
+    <img src="https://img.shields.io/github/stars/msr8/catapi?color=3E3E3E&labelColor=302D41&style=for-the-badge">
+    <img src="https://img.shields.io/github/last-commit/msr8/markify?color=2F2F2F&labelColor=302D41&style=for-the-badge">   
+    <img src="https://img.shields.io/github/issues/msr8/markify?color=202020&labelColor=302D41&style=for-the-badge">
+</div>
+
+</body>
+</html>
+
+
+
+
+<!-- 
+If you're seeing this, all this code was written in like a week by me, (edit: started to change 
+it slowly after months of last touching it, cause i finally bought the server) a person who has 
+almost never touched HTML in their life. I know its awful, but I hope you find it useful <3
+-> Make the arg examples links
+-> Add github badges
+Suck my thick juicy cock shash <3 
