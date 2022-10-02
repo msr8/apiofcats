@@ -52,7 +52,7 @@ h2.mainheading {
 
 p {
     color : #ffffff;
-    font-family: Roboto, sans-serif;
+    font-family: 'Ubuntu Mono', sans-serif;
     /* font-weight: 200; */
     font-size: smalls;
     /* background-color: #fca21127; */
@@ -116,8 +116,11 @@ button:hover{
     margin-top: 12px;
 }
 
-body {
+html {
     background-color: #090e12 ;
+}
+
+body {
     margin-right: 3em;
     margin-left:  3em;
 }
@@ -199,4 +202,6 @@ th {
     display : flex;
     /* margin-top: 3em; */
     justify-content: space-evenly;
+    max-width: 100%;
+    max-height: 100vh;
 }
