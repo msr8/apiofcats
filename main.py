@@ -22,7 +22,7 @@ CONFIG_FP = os.path.join( os.path.dirname(__file__) , 'config.json' )
 STATIC    = os.path.join( os.path.dirname(__file__) , 'static' )
 # LOG_DIR = os.path.join( os.path.dirname(__file__) , 'logs' )
 # LOG_FP  = os.path.join( LOG_DIR ,                    f'{int(t.time())}.txt' )
-LOG_FP    = os.path.join( os.path.dirname(__file__) , 'log.txt' )
+LOG_DIR   = os.path.join( os.path.dirname(__file__) , 'logs' )
 DEFAULT_EXTS = ['png','jpg','jpeg','mp4']
 
 
@@ -32,8 +32,8 @@ EYEBLEACH_PATH = CONFIG['eyebleach_path']
 DOMAIN         = CONFIG['domain']
 
 # Makes log dir
-# os.makedirs(LOG_DIR, exist_ok=True)
-log_fp = LOG_FP
+os.makedirs(LOG_DIR, exist_ok=True)
+log_dir =   LOG_DIR
 
 printf(f'[gray50][CONFIG] Eyebleach path:      [u]{EYEBLEACH_PATH}[/][/]')
 printf(f'[gray50][CONFIG] Domain:              {DOMAIN}[/]')
@@ -70,7 +70,7 @@ class Random(Resource):
         args  = request_api.form
         extra = '' if request_api.args  else args.to_dict()
         extra = '' if not extra         else extra
-        logme(request, log_fp, DOMAIN, extra)
+        logme(request, log_dir, DOMAIN, extra)
         # Returns the data
         return { 'amount':len(files) , 'files':files }
 
@@ -83,7 +83,7 @@ api.add_resource(Random, '/api/random')
 
 class Stats(Resource):
     def func(self):
-        logme(request, log_fp, DOMAIN)
+        logme(request, log_dir, DOMAIN)
         # Gets the extensions
         exts = get_exts(EYEBLEACH_PATH)
         # Gets the number of total files
@@ -110,7 +110,7 @@ def favicon():
 
 @app.route('/', methods=["GET", "POST"])
 def page_home():
-    logme(request, log_fp, DOMAIN)
+    logme(request, log_dir, DOMAIN)
     exts = get_exts(EYEBLEACH_PATH)
     total = sum(exts.values())
     # return render_template('home.html', shit_to_be_filled_out_in_python=total, DOMAIN=DOMAIN)
@@ -138,7 +138,7 @@ def page_random():
     # Gets the file info
     fp, fname, file_ext = file_dic['fp'], file_dic['fname'], file_dic['ext']
     # Logs it
-    logme(request, log_fp, DOMAIN, f'[orange3]({fname})[/]')
+    logme(request, log_dir, DOMAIN, f'[orange3]({fname})[/]')
     # If the redirect arg is given, redirects
     if redirect_arg:    return redirect( url_for('page_library',fname=fname) )
     # Else, displays the media
@@ -158,7 +158,7 @@ def page_library(fname):
 
 @app.route('/test<arg1>')
 def page_test(arg1):
-    logme(request, log_fp, DOMAIN)
+    logme(request, log_dir, DOMAIN)
     return render_template('image.html', arg1=arg1)
 
 
@@ -186,14 +186,14 @@ if __name__ == '__main__':
 
 '''
 CODING BASED
-->
+-> Make the logme() func to save logs based on date
 SERVER BASED
 -> Change password of root and mark in server
 -> Add keybased SSH authentication
 LONG ASS SHIT
 -> Add library exploring
--> Add /stats ie just a fancy version of /api/stats
 
+-> Find if any file is 0 bytes
 
 
 

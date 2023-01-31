@@ -72,13 +72,11 @@ p a:hover{
 }
 
 button{
-    /* padding: 0.25em; */
     padding: 0.4em;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Comfortaa', sans-serif;
     font-weight: 800;
     letter-spacing: 0.09em;
     background-color: #24252a;
-    /* background-color: transparent; */
     border-radius: 13px;
     border-style: solid;
     border-top-color: #e5e5e5;

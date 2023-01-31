@@ -7,12 +7,10 @@
     <title>Cats!!</title>
     <link rel="stylesheet" href="../static/App.css">
     <link rel="stylesheet" href= "{{ url_for('static',filename='App.css') }}">
-    <link rel="stylesheet" href="<link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="<link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa" rel="stylesheet">
 </head>
 
 <!-- <div class="footerimages">
@@ -37,12 +35,14 @@ I got all the images/videos through public sources (mostly reddit) and I DO NOT 
 </p>
 
 
-
-<form action="/random">
-    <br><br><br><br><br><br><br><br>
-    <button class = "basiccenterthatshit">Random Cat</button>
-    <br><br><br><br><br><br>
-</form>
+<!-- Else br tags were being ignored, idkw -->
+<div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <a href="/random" target="_blank">
+        <button class = "basiccenterthatshit">Random Cat</button>
+    </a>
+    <br><br><br><br><br><br><br><br><br><br>
+</div>
 </main>
 
 

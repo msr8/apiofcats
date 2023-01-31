@@ -1,7 +1,8 @@
 from rich import print as printf
 
-import datetime as dt
-import random   as r
+from   threading import Thread
+import datetime  as dt
+import random    as r
 import os
 
 
@@ -83,12 +84,13 @@ def get_exts(eyebleach_path:str) -> dict:
 
 
 
-def logme(request, log_fp:str, domain, extra:str=''):
+def main_logme_func(req_dic:dict[str], log_dir:str, domain:str, extra:str=''):
     # Gets all the attributes
-    ts  = get_ts()
-    url = request.url.replace(request.host_url, '')
-    ip  = request.access_route[0]
-    ref = request.referrer
+    ts      = get_ts()
+    url     = req_dic['url'].replace(req_dic['host_url'], '')
+    ip      = req_dic['access_route'][0]
+    ref     = req_dic['referrer']
+    log_fp  = os.path.join(log_dir, get_log_fp())
     # Enchancements
     ip  = ip  + ' ' * ( 15-len(ip) )
     url = url + ' ' * ( max( 10-len(url) , 0 ) ) 
@@ -100,13 +102,23 @@ def logme(request, log_fp:str, domain, extra:str=''):
     # Prints it and saves to file
     printf(text)
     with open(log_fp, 'a') as f:
-        f.write(f'{text}-- [light_steel_blue]{request.user_agent.string} {request.accept_languages.__str__()}[/]\n')
+        f.write(f'{text}-- [light_steel_blue]{req_dic["user_agent"].string} {req_dic["accept_languages"].__str__()}[/]\n')
         # extra = extra.replace('[/]','').replace('[orange3]','')
         # f.write(f'[{ts}]  {ip}-- {ref}/{url} {extra} -- {request.user_agent.string} {request.accept_languages.__str__()}\n')
 
 
 
-
+def logme(request, log_dir:str, domain:str, extra:str=''):
+    req_dic = {
+        'url':              request.url,
+        'host_url':         request.host_url,
+        'access_route':     request.access_route,
+        'referrer':         request.referrer,
+        'user_agent':       request.user_agent,
+        'accept_languages': request.accept_languages
+    }
+    thr = Thread(target=main_logme_func, args=(req_dic, log_dir, domain, extra,))
+    thr.start()
 
 
 
@@ -127,12 +139,27 @@ def get_ts() -> str:
 
 
 
+def get_log_fp() -> str:
+    # Gets the current time
+    timezone_diff = dt.timedelta(hours=5.5)  
+    tz_info       = dt.timezone(timezone_diff, name="GMT")
+    curr_time     = dt.datetime.now()
+    # Exracts all the attributes
+    yr            = curr_time.year
+    mon           = curr_time.month
+    day           = curr_time.day
+    # Returns the string
+    return f'{yr}-{mon}-{day}.log'
+
+
+
+
+
 
 
 
 '''
-request.access_route  (maybe IP?) (correct)
-request.url_rule      (endpoint)
+
 
 
 '''
