@@ -42,6 +42,10 @@ function main() {
         div_content = `huh?`;
     }
 
+    // Sends a req to files.json
+    let r = fetch('files.json');
+    print(`r: ${r}`);
+
     // Runs change_content() once DOM has loaded
     window.onload = function() {
         change_content(div_content);

@@ -1,0 +1,203 @@
+*::selection {
+    background-color: #fca311;
+}
+
+.heading{
+    color: #fca311;
+    font-size: 2.75em;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    font-family: 'Montserrat', sans-serif;
+    /* text-align: center; */
+    font-style: bold;
+    /* text-decoration: underline 0.03em aqua; */
+    border-bottom: 0.04em solid aqua;
+    padding-bottom: 2px;
+}
+
+#logo{
+    display : inline-block;
+    height: 5em;
+    width: 4em;
+    margin-top: 15px;
+}
+
+.section1{
+    display : flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.leftme{
+    text-align: left;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+    /* border-bottom: 0.12em hidden #fca311; */
+}
+h2.mainheading {
+    color: #e5e5e5;
+    text-align: left;
+    letter-spacing: 0.3em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    border-bottom: 0.12em solid #fca311;
+}
+
+p {
+    color : #ffffff;
+    font-family: 'Ubuntu Mono', sans-serif;
+    /* font-weight: 200; */
+    font-size: smalls;
+    /* background-color: #fca21127; */
+    border-radius: 10px;
+    /* padding: 0.35em; */
+    line-height: 1.5em;
+    letter-spacing: 0.065em;
+    text-align: left;
+}
+
+p a {
+    text-decoration: none;
+    color: #fca311;
+}
+p a:hover{
+    text-decoration: underline solid #fca311;
+}
+
+button{
+    padding: 0.4em;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    background-color: #24252a;
+    border-radius: 13px;
+    border-style: solid;
+    border-top-color: #e5e5e5;
+    border-left-color: #e5e5e5;
+    border-right-color: dimgray;
+    border-bottom-color: dimgray;
+    border-width: 3.25px;
+    font-size: 2.5em;
+    color: #fca311;
+    transition: color 0.5s, background-color 0.5s, border-top-color 0.5s, border-left-color 0.5s, border-right-color 0.5s, border-top-color 0.5s, transform 0.5s;
+}
+
+button:hover{
+    cursor:pointer;
+    border-top-color: dimgray;
+    border-left-color: dimgray;
+    border-right-color: #e5e5e5;
+    border-bottom-color: #e5e5e5;
+    /* color: #24252a;  */
+    /* background-color: #fca311; */
+    color: rgba(245, 222, 179, 0.9);
+    background-color: black;
+    transform: translateY(-5px);
+
+}
+
+.section2 {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    /* border-bottom: 0.12em solid #fca311; */
+    margin-top: 12px;
+}
+
+html {
+    background-color: #090e12;
+}
+
+body {
+    margin-right: 3em;
+    margin-left:  3em;
+}
+
+.basic::selection{
+    background: #fca311;
+}
+
+summary{
+    color: white;
+}
+summary:hover{
+    color:#fca311;
+    text-decoration: underline solid #fca311;
+    cursor: pointer;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+footer a, ul {
+    padding: 0;
+    text-decoration: none;
+    color: #e5e5e5;
+    text-align: center;
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200    
+}
+
+footer a:hover {
+    color: aqua;
+}
+
+table, th, td {
+    font-family: Consolas;
+    border: 1px solid white;
+    border-collapse: collapse;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+td {
+    text-align: left;
+}
+
+table {
+    text-align: center;
+}
+
+th {
+    color: #fca311;
+}
+
+.centerme {
+    text-align: center;
+}
+
+.smoll {
+    font-size: 0.5em;
+}
+
+.codeblock {
+    color: white;
+    background-color: #1e2327;
+    /* background-color: #1b1b21; */
+    font-family: Consolas;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 0.8em;
+    text-align: left;
+}
+
+.footerimages{
+    display : flex;
+    /* margin-top: 3em; */
+    justify-content: space-evenly;
+}
